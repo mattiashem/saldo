@@ -6,7 +6,7 @@ services:
     build: feeder/.
     volumes:
       - ./feeder/:/code
-    command: tail -f /etc/hosts
+    #command: tail -f /etc/hosts
     environment:
       - FIREBASE=https://.firebaseio.com/
   sensor:
@@ -14,7 +14,7 @@ services:
     volumes:
       - ./sensor/:/code
     environment:
-       - telegram_api=
-       - telegram_chat=
-    command: tail -f /etc/hosts
+       - telegram_api=botw
+       - telegram_chat=9
+    #command: tail -f /etc/hosts
 

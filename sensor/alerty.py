@@ -10,7 +10,7 @@ def alertPeople(message):
 	Alert people 
 	'''
 	sendToTelegram(message)
-	sendImageTelegram()
+	#sendImageTelegram()
 
 
 def sendToTelegram(message,level="info"):

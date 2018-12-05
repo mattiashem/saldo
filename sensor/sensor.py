@@ -9,24 +9,24 @@ from alerty import *
 #
 
 #Values to send
-store = "ica-1"
-shell = "one"
+airport = "arlanda"
+storage = "one"
 
 
 
 
 
 #Lets start with 0
-current_weight =0
+number =0
 
 
 
 
-def sendData(weight):
+def sendData(number):
 	'''
 	Send data to the que and on to the database
 	'''
-	data ={"store":"{0}".format(store),"shell":"{0}".format(shell),"datetime":"{0}".format(datetime.datetime.now()),"data":{"weight":"{0}".format(weight)}}
+	data ={"airport":"{0}".format(airport),"storage":"{0}".format(storage),"datetime":"{0}".format(datetime.datetime.now()),"data":{"kolli":"{0}".format(number)}}
 	print(data)
 	dataClean = str(data).replace('\'','"')
 	add_to_que(dataClean)
@@ -45,31 +45,26 @@ while True:
 
 
 
-	print("on scale {0} last value {1}".format(weight,current_weight))
+	print("on scale {0} last value {1}".format(weight,number))
 
-	if current_weight == 0:
-		current_weight = weight
+	if number == 0:
+		number = weight
 
 
-	if current_weight > weight:
-		print("We have weight loss")
-		diffrence = current_weight - weight
-		diffrence_procent = float(diffrence) / float(current_weight)
-		if diffrence_procent > 0.25:
-			print("We have a big change")
-			#alertPeople("{0}:{1} - Detetced a big drop change !".format(store,shell))
-		current_weight = weight
+	if number > weight:
+		print("We have change")
+		alertPeople("{0}:{1} - Brush kolli has bean updated to  {2}".format(airport,storage,weight))
+		number = weight
 
 	
-	if current_weight < weight:
+	if number < weight:
 		print("We have gain weight")
-		#Set new current waight
-		current_weight = weight
-		#alertPeople("{0}:{1} - Detetced incresse in data !".format(store,shell))
+		alertPeople("{0}:{1} - Brush kolli has bean updated to  {2}".format(airport,storage,weight))
+		number = weight
 	
 
 	#Send all data to database
 	sendData(weight)
 
 	#Sleep so not repet
-	time.sleep(5)
+	time.sleep(10)

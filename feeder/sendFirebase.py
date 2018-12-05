@@ -11,10 +11,10 @@ def adddataFirebase(data):
 	'''
 	jsondata = json.loads(data.decode('utf-8'))
 	print(jsondata)
-	store = str(jsondata['store'])
-	shell = str(jsondata['shell'])
+	airport = str(jsondata['airport'])
+	storage = str(jsondata['storage'])
 	
 
 
-	result = firebase.post('/detect/'+store+'/'+shell+'/', jsondata, params={'print': 'pretty'})
+	result = firebase.post('/saldo/'+airport+'/'+storage+'/', jsondata, params={'print': 'pretty'})
 	print(result)
