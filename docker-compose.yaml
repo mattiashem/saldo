@@ -1,0 +1,20 @@
+version: '2'
+services:
+  rabbitmq:
+    image: rabbitmq:alpine
+  feeder:
+    build: feeder/.
+    volumes:
+      - ./feeder/:/code
+    command: tail -f /etc/hosts
+    environment:
+      - FIREBASE=https://.firebaseio.com/
+  sensor:
+    build: sensor/.
+    volumes:
+      - ./sensor/:/code
+    environment:
+       - telegram_api=
+       - telegram_chat=
+    command: tail -f /etc/hosts
+
